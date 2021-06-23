@@ -60,6 +60,7 @@ const displayCapital = (dataValue) => {
   countryValue = capital.country
 }
 
+
 const displayState = (dataValue) => {
   let country = "";
   let countryIndex;
