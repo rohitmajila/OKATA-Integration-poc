@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.16.0/js/okta-sign-in.min.js" type="text/javascript"></script>
+    <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.16.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.16.0/css/okta-theme.css" type="text/css" rel="stylesheet"/>
+
+</head>
+
+<body>
+   <div>
+       <h1>Web page</h1>
+       <div id="messageBox">
+           You are not logged in.
+       </div>
+   </div>
+
+   <div id="okta-login-container"></div>
+   <script type="text/javascript">
+    var oktaSignIn = new OktaSignIn({
+      baseUrl: "https://dev-53650438.okta.com",
+      clientId: "0oa12c3jzn4dnxZsr5d7",
+      authParams: {
+        issuer: "default",
+        responseType: ['token', 'id_token'],
+        display: 'page'
+      }
+    });
+  
+    if (oktaSignIn.token.hasTokensInUrl()) {
+      oktaSignIn.token.parseTokensFromUrl(
+        function success(res) {
+          var accessToken = res[0];
+          var idToken = res[1];
+  
+          oktaSignIn.tokenManager.add('accessToken', accessToken);
+          oktaSignIn.tokenManager.add('idToken', idToken);
+  
+          window.location.hash='';
+          document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in! :)";
+        },
+        function error(err) {
+          console.error(err);
+        }
+      );
+    } else {
+      oktaSignIn.session.get(function (res) {
+        if (res.status === 'ACTIVE') {
+          document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are *still* logged in! :)";
+          return;
+        }
+        oktaSignIn.renderEl(
+          { el: '#okta-login-container' },
+          function success(res) {},
+          function error(err) {
+            console.error(err);
+          }
+        );
+      });
+    }
+  </script>
+</body>
+
+</html>

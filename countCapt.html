@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="countCapt.css">
+</head>
+
+<body>
+    <table id="table">
+        <button onclick="addColumnRight()">Add Right</button>
+        <tr>
+            <td>
+                <select id="locality-dropdown" onchange="displayCapital(this.value)" name="locality"></select>
+            </td>
+            <td> 
+                <select id="capital-dropdown" onchange="displayState(this.value)" ></select>
+            </td>
+            <td> 
+                <button onclick="deleteRow()">Delete</button>
+            </td>
+            
+        </tr>
+        
+    </table>
+    <button onclick="addRowBelow()">Add Row Below</button>
+
+    <button onclick="submitData()">Submit Data</button>
+    
+
+    <script src="countCapt.js"></script>
+</body>
+
+</html>
