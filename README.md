@@ -1,4 +1,4 @@
-# essenvia-poc
+# OKTA-POC
 1. Integration of Okta with plain web app(oktaPoc.html)
 2. Table with 2 column(countCapt.html)
 3. Table JavaScript logic(countcapt.js)
